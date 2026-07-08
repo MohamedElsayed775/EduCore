@@ -1,0 +1,8 @@
+﻿@model EduCore.Models.Course
+<h1>Delete Course</h1>
+<p>Are you sure you want to delete this course?</p>
+<form method="post" asp-action="DeleteConfirmed" asp-controller="Course">
+	<input asp-for="Id" type="hidden" />
+	<button type="submit" class="btn btn-danger">Yes, Delete</button>
+	<a href="/Course/ShowAll" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,14 @@
+﻿@using EduCore.Models
+@model EduCore.Models.Instructor
+
+
+<h1>Details</h1>
+
+<h2>Id : @Model.Id</h2>
+<h2>Name : @Model.Name</h2>
+<h2>Address : @Model.Address</h2>
+<h2>Salary : @Model.Salary</h2>
+<img src="~/Image/@Model.Image" style="width : 200px;" />
+<div>
+	<a asp-action="GetAll" class="btn btn-secondary">Back to List</a>
+</div>

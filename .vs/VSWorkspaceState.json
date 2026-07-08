@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\EduCore",
+    "\\EduCore\\bin",
+    "\\EduCore\\Views",
+    "\\EduCore\\Views\\Course",
+    "\\EduCore\\Views\\Home",
+    "\\EduCore\\Views\\Instructor"
+  ],
+  "SelectedNode": "\\EduCore\\Views\\Instructor\\Edit.cshtml",
+  "PreviewInSolutionExplorer": false
+}

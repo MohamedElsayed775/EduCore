@@ -1,0 +1,36 @@
+@model List<EduCore.Models.Department>
+@{
+    ViewData["Title"] = "Show All Departments";
+}
+
+<h1>Show All Departments</h1>
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">Create New Department</a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Manager</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dept in Model)
+        {
+            <tr>
+                <td>@dept.Id</td>
+                <td>@dept.Name</td>
+                <td>@dept.Manger</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@dept.Id" class="btn btn-primary">Edit</a> |
+                    <a asp-action="GetById" asp-route-id="@dept.Id" class="btn btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@dept.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

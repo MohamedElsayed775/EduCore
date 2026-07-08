@@ -1,0 +1,61 @@
+﻿using EduCore.Models;
+using EduCore.Models.Data;
+using EduCore.Repository;
+using EduCore.Repository.IRepository;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace EduCore.Controllers
+{
+    public class CourseController : Controller
+    {
+        ICourseRepository courseRepository;
+        public CourseController(ICourseRepository courseRepo)
+        {
+            courseRepository = courseRepo;
+        }
+        public IActionResult ShowAll()
+        {
+            List<Course> courses = courseRepository.ShowAll();
+            return View("ShowAll", courses);
+        }
+        public IActionResult New()
+        {
+            return View("New");
+        }
+        [HttpPost]
+        public IActionResult SaveNew(Course CourseUi)
+        {
+            if (ModelState.IsValid == true)
+            {
+                courseRepository.Add(CourseUi);
+                courseRepository.SaveChanges();
+                return RedirectToAction("ShowAll");
+            }
+            else
+            {
+                return View("New", CourseUi);
+            }
+        }
+        public IActionResult Edit(int id)
+        {
+            Course course = courseRepository.GetById(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View("Edit", course);
+        }
+        [HttpPost]
+        public IActionResult SaveEdit(Course courseUi)
+        {
+            if (ModelState.IsValid)
+            {
+                courseRepository.Update(courseUi);
+                //courseRepository.SaveChanges();
+                return RedirectToAction("ShowAll");
+            }
+            return View("Edit", courseUi);    
+        }
+    }
+}

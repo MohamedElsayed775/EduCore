@@ -1,0 +1,49 @@
+﻿@model EduCore.Models.ViewModel.InstructorWithListOfCoursesAndDepartmentViewModel
+@{
+	ViewData["Title"] = "New";
+	SelectList listCourse = new SelectList(Model.Courses, "Id", "Name");
+	SelectList listDept = new SelectList(Model.Departments, "Id", "Name");
+}
+
+<h1>Create New Instructor</h1>
+
+<form method="post" asp-action="SaveNew" asp-controller="Instructor">
+	<div>
+		<label asp-for="Name"></label>
+		<input asp-for="Name" class="form form-control" />
+	</div>
+
+	<div>
+		<label asp-for="Image"></label>
+		<input asp-for="Image" class="form form-control" />
+	</div>
+
+	<div>
+		<label asp-for="Salary"></label>
+		<input asp-for="Salary" class="form form-control" />
+	</div>
+
+	<div>
+		<label asp-for="Address"></label>
+		<input asp-for="Address" class="form form-control" />
+	</div>
+
+	<div>
+		<label>Course</label>
+		<Select class="form form-control" asp-for="CourseId" asp-items="listCourse"></Select>
+	</div>
+
+	<div>
+		<label>Department</label>
+		<Select class="form form-control" asp-for="DepartmentId" asp-items="listDept"></Select>
+	</div>
+
+	<div>
+		<input type="submit" value="Create" class="btn btn-success" />
+	</div>
+
+</form>
+
+<div>
+	<a asp-action="GetAll" class="btn btn-secondary">Back to List</a>
+</div>

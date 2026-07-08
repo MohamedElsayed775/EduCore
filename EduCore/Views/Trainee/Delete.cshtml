@@ -1,0 +1,8 @@
+﻿@model EduCore.Models.Trainee
+<h1>Delete Trainee</h1>
+<p>Are you sure you want to delete this Trainee?</p>
+<form method="post" asp-action="DeleteConfirmed" asp-controller="Trainee">
+	<input asp-for="Id" type="hidden" />
+	<button type="submit" class="btn btn-danger">Yes, Delete</button>
+	<a asp-controller="Trainee" asp-action="ShowAll" class="btn btn-secondary">Cancel</a>
+</form>
