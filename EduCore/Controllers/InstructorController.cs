@@ -21,12 +21,12 @@ namespace EduCore.Controllers
         public IActionResult GetAll()
         {
             List<Instructor> instructors = InsRepo.ShowAll();
-            return View("GetAll", instructors);
+            return View("ShowAll", instructors);
         }
         public IActionResult GetById(int id)
         {
             Instructor instructors = InsRepo.GetById(id);
-            return View("GetById", instructors);
+            return View("Details", instructors);
         }
         #region Create
         public IActionResult New()

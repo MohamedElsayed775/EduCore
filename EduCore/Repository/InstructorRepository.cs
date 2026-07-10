@@ -16,11 +16,11 @@ namespace EduCore.Repository
         }
         public List<Instructor> ShowAll()
         {
-            return context.Instructors.AsNoTracking().ToList();
+            return context.Instructors.Include(i => i.Course).Include(i => i.Department).AsNoTracking().ToList();
         }
         public Instructor GetById(int id)
         {
-            return context.Instructors.FirstOrDefault(i => i.Id == id);
+            return context.Instructors.Include(i => i.Course).Include(i => i.Department).FirstOrDefault(i => i.Id == id);
         }
         public void Add(Instructor entity)
         {
