@@ -6,7 +6,7 @@ namespace EduCore.Models
     public class CrsResult
     {
         public int Id { get; set; }
-        public int Degree { get; set; }
+        public int Degree { get; set; } = 0;
 
 
         [ForeignKey("Course")]

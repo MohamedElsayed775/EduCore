@@ -16,11 +16,11 @@ namespace EduCore.Repository
         }
         public List<Trainee> ShowAll()
         {
-            return context.Trainees.Include(t => t.Department).AsNoTracking().ToList();
+            return context.Trainees.Include(t => t.Department).Include(t => t.CrsResults).AsNoTracking().ToList();
         }
         public Trainee GetById(int id)
         {
-            return context.Trainees.Include(t => t.Department).FirstOrDefault(t => t.Id == id);
+            return context.Trainees.Include(t => t.Department).Include(t => t.CrsResults).FirstOrDefault(t => t.Id == id);
         }
         public void Add(Trainee entity)
         {

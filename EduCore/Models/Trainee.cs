@@ -14,7 +14,7 @@ namespace EduCore.Models
         public int DepartmentId { get; set; }
         public virtual Department? Department { get; set; }
 
-        public ICollection<CrsResult>? CrsResults { get; set; }
+        public ICollection<CrsResult>? CrsResults { get; set; } = new List<CrsResult>();
     }
 
 }

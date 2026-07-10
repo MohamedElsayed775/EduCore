@@ -1,53 +1,9 @@
-﻿@model IEnumerable<EduCore.Models.Trainee>
-
-@{
-	ViewData["Title"] = "ShowAll";
-}
-
-<h1>Add & Remove Trainees</h1>
-
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.Name)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Address)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Grade)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Department)
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model)
-		{
-			<tr>
-				<td>
-					@Html.DisplayFor(model => item.Name)
-				</td>
-				<td>
-					@Html.DisplayFor(model => item.Address)
-				</td>
-				<td>
-					@Html.DisplayFor(model => item.Grade)
-				</td>
-				<td>
-					@Html.DisplayFor(model => item.Department.Name)
-				</td>
-				<td>
-					<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Add Trainee</a>
-					<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Remove Trainee</a>
-				</td>
-			</tr>
-		}
-	</tbody>
-</table>
-
-<div>
-	<a asp-action="ShowAll" class="btn btn-secondary">Back to List</a>
-</div>
+﻿@model EduCore.Models.ViewModel.AddTraineeViewModel
+<h1>Add Trainee to Course</h1>
+<p>Are you sure you want to add this trainee to the course?</p>
+<form method="post" asp-action="AddTraineeConfirmed" asp-controller="Course">
+	<input asp-for="CourseId" type="hidden" />
+	<input asp-for="TraineeId" type="hidden" />
+	<button type="submit" class="btn btn-primary">Yes, Add Trainee</button>
+	<a href="/Course/ShowAll" class="btn btn-secondary">Cancel</a>
+</form>

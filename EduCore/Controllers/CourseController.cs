@@ -1,5 +1,6 @@
 ﻿using EduCore.Models;
 using EduCore.Models.Data;
+using EduCore.Models.ViewModel;
 using EduCore.Repository;
 using EduCore.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,12 @@ namespace EduCore.Controllers
     {
         ICourseRepository courseRepository;
         ITraineeRepository traineeRepo;
-        public CourseController(ICourseRepository _courseRepo , ITraineeRepository _traineeRepo)
+        ICrsResultRepository crsResultRepo;
+        public CourseController(ICourseRepository _courseRepo, ITraineeRepository _traineeRepo, ICrsResultRepository _crsResultRepo)
         {
             courseRepository = _courseRepo;
             traineeRepo = _traineeRepo;
+            crsResultRepo = _crsResultRepo;
         }
         public IActionResult ShowAll()
         {
@@ -57,7 +60,7 @@ namespace EduCore.Controllers
             }
             return View("Edit", course);
         }
-        
+
         [HttpPost]
         public IActionResult SaveEdit(Course courseUi)
         {
@@ -67,7 +70,7 @@ namespace EduCore.Controllers
                 courseRepository.SaveChanges();
                 return RedirectToAction("ShowAll");
             }
-            return View("Edit", courseUi);    
+            return View("Edit", courseUi);
         }
 
         public IActionResult Delete(int id)
@@ -91,7 +94,55 @@ namespace EduCore.Controllers
         public IActionResult AddOrRemoveTrainee(int id)
         {
             List<Trainee> trainees = traineeRepo.ShowAll();
-            return View("AddTrainee", trainees);
+            ViewBag.CourseId = id;
+            return View("Add&RemoveTrainee", trainees);
         }
+
+        public IActionResult AddTrainee(int courseId, int traineeId)
+        {
+            AddTraineeViewModel addTraineeViewModel = new AddTraineeViewModel
+            {
+                CourseId = courseId ,
+                TraineeId = traineeId
+            };
+            return View("AddTrainee", addTraineeViewModel);
+        }
+        [HttpPost]
+        public IActionResult AddTraineeConfirmed(AddTraineeViewModel addTraineeViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                CrsResult crsResult = new CrsResult
+                {
+                    CourseId = addTraineeViewModel.CourseId,
+                    TraineeId = addTraineeViewModel.TraineeId
+                };
+                crsResultRepo.Add(crsResult);
+                crsResultRepo.SaveChanges();
+                return RedirectToAction("ShowAll");
+            }
+            else
+            {
+                return View("AddTrainee", addTraineeViewModel);
+            }
+        }
+
+
+        //public IActionResult AddTrainee(int courseId, int traineeId)
+        //{
+        //    return RedirectToAction("AddOrRemoveTrainee", new { id = courseId });
+        //}
+        //[HttpPost]
+        //public IActionResult AddTrainee(AddTraineeViewModel addTraineeViewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        return RedirectToAction("AddOrRemoveTrainee", new { id = addTraineeViewModel.CourseId });
+        //    }
+        //    else
+        //    {
+        //        return View("AddTrainee", addTraineeViewModel);
+        //    }
+        //}
     }
 }
