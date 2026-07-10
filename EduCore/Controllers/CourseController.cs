@@ -126,23 +126,17 @@ namespace EduCore.Controllers
                 return View("AddTrainee", addTraineeViewModel);
             }
         }
-
-
-        //public IActionResult AddTrainee(int courseId, int traineeId)
-        //{
-        //    return RedirectToAction("AddOrRemoveTrainee", new { id = courseId });
-        //}
-        //[HttpPost]
-        //public IActionResult AddTrainee(AddTraineeViewModel addTraineeViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        return RedirectToAction("AddOrRemoveTrainee", new { id = addTraineeViewModel.CourseId });
-        //    }
-        //    else
-        //    {
-        //        return View("AddTrainee", addTraineeViewModel);
-        //    }
-        //}
+        public IActionResult RemoveTrainee(int crsResultId)
+        {
+            CrsResult crsResult = crsResultRepo.GetById(crsResultId);
+            return View("RemoveTrainee",crsResult);
+        }
+        [HttpPost]
+        public IActionResult RemoveTraineeConfirmed(int Id)
+        {
+            crsResultRepo.Delete(Id);
+            crsResultRepo.SaveChanges();
+            return RedirectToAction("ShowAll");
+        }
     }
 }

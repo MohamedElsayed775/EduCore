@@ -1,0 +1,8 @@
+﻿@model EduCore.Models.CrsResult
+<h1>Remove Trainee from Course</h1>
+<p>Are you sure you want to remove this trainee from the course?</p>
+<form method="post" asp-action="RemoveTraineeConfirmed" asp-controller="Course">
+	<input asp-for="Id" type="hidden" />
+	<button type="submit" class="btn btn-danger">Yes, Remove Trainee</button>
+	<a href="/Course/ShowAll" class="btn btn-secondary">Cancel</a>
+</form>
