@@ -46,7 +46,8 @@
 				@if (item.CrsResults.Any(c => c.CourseId == ViewBag.CourseId))
 				{
 					<td>
-						<a asp-action="RemoveTrainee" asp-route-crsResultId="@item.CrsResults.First(c => c.CourseId == ViewBag.CourseId).Id" class="btn btn-danger">Remove Trainee</a>
+						<a asp-action="RemoveTrainee" asp-route-crsResultId="@item.CrsResults.First(c => c.CourseId == ViewBag.CourseId).Id" class="btn btn-danger">Remove Trainee</a>|
+						<a asp-action="EditDegree"    asp-route-crsResultId="@item.CrsResults.First(c => c.CourseId == ViewBag.CourseId).Id" asp-route-traineeId="@item.Id" asp-route-courseId="@ViewBag.CourseId" class="btn btn-warning">Edit Degree</a>
 					</td>
 				}
 				else

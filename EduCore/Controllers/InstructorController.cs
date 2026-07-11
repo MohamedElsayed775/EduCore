@@ -108,6 +108,6 @@ namespace EduCore.Controllers
             InsRepo.Delete(id);
             InsRepo.SaveChanges();
             return RedirectToAction("GetAll");
-        }        
+        }    
     }
 }

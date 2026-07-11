@@ -138,5 +138,25 @@ namespace EduCore.Controllers
             crsResultRepo.SaveChanges();
             return RedirectToAction("ShowAll");
         }
+        public IActionResult EditDegree(int crsResultId)
+        {
+            CrsResult crsResult = crsResultRepo.GetById(crsResultId);
+            return View("EditDegree", crsResult);
+        }
+        public IActionResult SaveDegree(TraineeDegreeViewModel traineeDegreeViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                CrsResult crsResult = crsResultRepo.GetById(traineeDegreeViewModel.Id);
+                crsResult.Degree = traineeDegreeViewModel.Degree;
+                crsResultRepo.Update(crsResult);
+                crsResultRepo.SaveChanges();
+                return RedirectToAction("ShowAll");
+            }
+            else
+            {
+                return View("EditDegree", traineeDegreeViewModel);
+            }
+        }
     }
 }
